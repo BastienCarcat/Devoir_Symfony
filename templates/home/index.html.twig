@@ -1,20 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Mes produits : {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Liste des produits</h1>
+    {% for item in produits %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/basti/Desktop/pro/B2/symfony/Devoir_Symfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/basti/Desktop/pro/B2/symfony/Devoir_Symfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.Nom }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ item.Reference }}</h6>
+            <p class="card-text">{{ item.Description }}</p>
+            <p class="card-text">{{ item.EAN }}</p>
+            <a href="{{ path("monForm_modif",{"id":item.id}) }}"
+               class="btn btn-primary">
+                <i class="far fa-edit"></i>
+            </a>
+            <a href="{{ path("suppr",{"id":item.id}) }}"
+               class="btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+    <a class="btn btn-primary left" href="{{ path("monForm") }}" role="button">ajouter un produit</a>
+    <br>
+    <br>
+    <br>
+
 {% endblock %}
